@@ -1,0 +1,45 @@
+# -*- coding: utf-8 -*-
+"""
+Created on Sat Apr 13 13:44:26 2019
+
+@author: safia
+"""
+"""
+Input:
+    First line  - Number of test cases
+    Next n lines- Each Product ID
+"""
+def get_isbn(product_id):  
+    digits=[0]*9
+    res=""
+    for i in range(9):
+        digits[-1-i]=product_id%10
+        res=str(product_id%10)+res
+        product_id//=10
+    #print(digits)
+    Sum=0
+    num=10
+    for i in range(9):
+        Sum+=digits[i]*num
+        num-=1
+    #print(Sum)
+    #print(Sum%11)
+    #print(11-(Sum%11))
+    last_digit= 11-(Sum%11)
+
+    if last_digit==10:
+        return res+'x'
+    elif last_digit==11:
+        return res + '0'
+    else:
+        return res + str(last_digit)
+
+product_ids=[]
+n=int(input())
+for i in range(n):
+    product_ids.append(int(input()))
+
+print("\n\nPRODUCT ID    ISBN")
+for product_id in product_ids:
+    print(product_id,end="  ")
+    print(get_isbn(product_id))
